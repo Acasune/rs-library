@@ -1,4 +1,4 @@
-struct Scanner<R, W: std::io::Write> {
+pub struct Scanner<R, W: std::io::Write> {
     reader: R,
     writer: std::io::BufWriter<W>,
 }
@@ -10,7 +10,7 @@ impl<R: std::io::Read, W: std::io::Write> Scanner<R, W> {
             writer: std::io::BufWriter::new(writer),
         }
     }
-    fn get<T: std::str::FromStr>(&mut self) -> T {
+    pub fn get<T: std::str::FromStr>(&mut self) -> T {
         use std::io::Read;
         let buf = self
             .reader
@@ -26,10 +26,10 @@ impl<R: std::io::Read, W: std::io::Write> Scanner<R, W> {
             .expect("Parse error.")
     }
 
-    fn get_vec<T: std::str::FromStr>(&mut self, n: usize) -> Vec<T> {
+    pub fn get_vec<T: std::str::FromStr>(&mut self, n: usize) -> Vec<T> {
         (0..n).map(|_| self.get()).collect()
     }
-    fn write<S: ToString>(&mut self, s: S) {
+    pub fn write<S: ToString>(&mut self, s: S) {
         use std::io::Write;
         self.writer.write_all(s.to_string().as_bytes()).unwrap();
     }
