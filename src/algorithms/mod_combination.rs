@@ -2,6 +2,7 @@
     fac: Vec<usize>,
     inv: Vec<usize>,
     finv: Vec<usize>,
+    md: usize,
 }
 
 impl mod_combination {
@@ -24,6 +25,14 @@ impl mod_combination {
             fac: fac,
             inv: inv,
             finv: finv,
+            md: md,
+        }
+    }
+    fn com(&mut self, n: usize, k: usize) -> usize {
+        if n < k {
+            0
+        } else {
+            self.fac[n] * (self.finv[k] * self.finv[n - k] % self.md) % self.md
         }
     }
 }
