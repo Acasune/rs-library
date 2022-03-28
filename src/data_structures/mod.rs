@@ -1,1 +1,2 @@
-﻿pub mod union_find;
+﻿mod segtree;
+pub mod union_find;
