@@ -43,8 +43,6 @@ mod tests {
                 let c: usize = sc.get();
                 let dt: dist_to = (v, c);
                 E[u].push(dt);
-                let dt: dist_to = (u, c);
-                E[v].push(dt);
             }
 
             let dists = dijkstra(s, &E);
