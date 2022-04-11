@@ -22,6 +22,7 @@ where
         }
     }
     fn update(&mut self, pos: usize, v: T) {
+        assert!(pos < self.n);
         let mut pos = pos + self.n;
         let data = &mut self.data;
         data[pos] = v;
@@ -32,6 +33,7 @@ where
         }
     }
     fn update_tmp(&mut self, pos: usize, v: T) {
+        assert!(pos < self.n);
         self.data[pos + self.n] = v;
     }
     fn update_all(&mut self) {
@@ -41,6 +43,7 @@ where
         }
     }
     fn find(&self, l: usize, r: usize) -> T {
+        assert!(l <= r && r <= self.n);
         if l == r {
             return self.e.clone();
         }
