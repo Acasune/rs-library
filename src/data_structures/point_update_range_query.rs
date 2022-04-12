@@ -1,5 +1,5 @@
 // Referring to https://atcoder.jp/contests/abc223/submissions/26655204
-//PURQ stands for Point Upgrade Range Query
+//PURQ stands for Point Update Range Query
 struct PURQ<T, F> {
     n: usize,
     data: Vec<T>,
