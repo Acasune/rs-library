@@ -44,6 +44,6 @@ impl RangeAddQueryTree {
     }
 
     fn query(&self, l: usize, r: usize) -> i64 {
-        self.sum(r - 1) - self.sum(l - 1)
+        self.sum(r) - self.sum(l)
     }
 }
