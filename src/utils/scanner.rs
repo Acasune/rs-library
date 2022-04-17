@@ -1,3 +1,6 @@
+// This file is modeled after:
+// https://github.com/kenkoooo/competitive-programming-rs/blob/master/src/utils/scanner.rs
+
 pub struct Scanner<R, W: std::io::Write> {
     reader: R,
     writer: std::io::BufWriter<W>,

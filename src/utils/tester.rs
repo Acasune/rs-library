@@ -1,3 +1,6 @@
+// This file is modeled after:
+// https://github.com/kenkoooo/competitive-programming-rs/blob/master/src/utils/test_helper.rs
+
 use std::fs::{self, File};
 use std::io::Read;
 
