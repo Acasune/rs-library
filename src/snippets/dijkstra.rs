@@ -13,7 +13,7 @@ fn dijkstra(s: usize, E: &Vec<Vec<(usize, usize)>>) -> Vec<usize> {
         for &(nxt, dist) in &E[s] {
             if dists[nxt] > dists[s] + dist {
                 dists[nxt] = dists[s] + dist;
-                que.push(Reverse((dist, nxt)));
+                que.push(Reverse((dists[nxt], nxt)));
             }
         }
     }
