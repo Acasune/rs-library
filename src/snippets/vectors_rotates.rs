@@ -1,4 +1,4 @@
-﻿fn right_rotate<T>(graph: &Vec<Vec<T>>) -> Vec<Vec<T>>
+﻿fn clockwise_rotate<T>(graph: &Vec<Vec<T>>) -> Vec<Vec<T>>
 where
     T: Copy,
 {
@@ -12,7 +12,7 @@ where
     }
     ret
 }
-fn left_rotate<T>(graph: &Vec<Vec<T>>) -> Vec<Vec<T>>
+fn anticlockwise_rotate<T>(graph: &Vec<Vec<T>>) -> Vec<Vec<T>>
 where
     T: Copy,
 {
@@ -32,7 +32,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_left_rotated_char() {
+    fn test_anticlockwise_rotated_char() {
         // .....
         // ..#..
         // .###.
@@ -58,12 +58,12 @@ mod tests {
             "....".chars().collect::<Vec<char>>(),
         ];
 
-        let transformed = left_rotate(&original);
+        let transformed = anticlockwise_rotate(&original);
         assert_eq!(transformed, expected);
     }
 
     #[test]
-    fn test_right_rotated_char() {
+    fn test_clockwise_rotated_char() {
         // ....
         // ..#.
         // .##.
@@ -88,11 +88,11 @@ mod tests {
             ".....".chars().collect::<Vec<char>>(),
         ];
 
-        let transformed = right_rotate(&original);
+        let transformed = clockwise_rotate(&original);
         assert_eq!(transformed, expected);
     }
     #[test]
-    fn test_left_rotated_usize() {
+    fn test_anticlockwise_rotated_usize() {
         // 17,13,9,5,1
         // 18,14,10,6,2
         // 19,15,11,7,3
@@ -117,12 +117,12 @@ mod tests {
             vec![17, 18, 19, 20],
         ];
 
-        let transformed = left_rotate(&original);
+        let transformed = anticlockwise_rotate(&original);
         assert_eq!(transformed, expected);
     }
 
     #[test]
-    fn test_right_rotated_usize() {
+    fn test_clockwise_rotated_usize() {
         // 1,2,3,4
         // 5,6,7,8
         // 9,10,11,12
@@ -147,7 +147,7 @@ mod tests {
             vec![20, 16, 12, 8, 4],
         ];
 
-        let transformed = right_rotate(&original);
+        let transformed = clockwise_rotate(&original);
         assert_eq!(transformed, expected);
     }
 }
