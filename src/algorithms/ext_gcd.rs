@@ -7,6 +7,15 @@
     }
 }
 
+fn gcd(a: i64, b: i64) -> i64 {
+    ext_gcd(a, b).2
+}
+
+fn lcm(a: i64, b: i64) -> i64 {
+    let g = gcd(a, b);
+    (a / g) * b
+}
+
 #[cfg(test)]
 mod tests {
     use crate::utils::tester::Tester;
@@ -29,5 +38,41 @@ mod tests {
             }
             sc.write(format!("{} {}\n", x, y));
         });
+    }
+
+    #[test]
+    fn test_find_gcd() {
+        //test 1
+        let expected = 2;
+        let actual = gcd(2, 4);
+        assert_eq!(expected, actual);
+
+        // test 2
+        let expected = 7;
+        let actual = gcd(14, 49);
+        assert_eq!(expected, actual);
+
+        // test 3
+        let expected = 7;
+        let actual = gcd(49, 14);
+        assert_eq!(expected, actual);
+    }
+
+    #[test]
+    fn test_find_lcm() {
+        //test 1
+        let expected = 2 * 2;
+        let actual = lcm(2, (2 * 2));
+        assert_eq!(expected, actual);
+
+        // test 2
+        let expected = 2 * 3;
+        let actual = lcm(2, 3);
+        assert_eq!(expected, actual);
+
+        // test 3
+        let expected = 7 * 2 * 3;
+        let actual = lcm(7 * 2, 7 * 3);
+        assert_eq!(expected, actual);
     }
 }
