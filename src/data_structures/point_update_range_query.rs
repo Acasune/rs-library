@@ -67,3 +67,65 @@ where
         (self.op)(&p, &q)
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_purq_max() {
+        let arr = vec![1, 3, 4, 7, 9];
+        let n = arr.len();
+        let mut tree = PURQ::new(n, 0, |&a, &b| a.max(b));
+        for i in 0..n {
+            tree.update_tmp(i, arr[i]);
+        }
+        tree.update_all();
+
+        // test 1
+        let expected = 7;
+        let actual = tree.find(1, 4); // [1, [3, 4, 7], 9];
+        assert_eq!(expected, actual);
+
+        //test 2
+        let expected = 4;
+        let actual = tree.find(1, 3); // [1, [3, 4], 7, 9];
+        assert_eq!(expected, actual);
+
+        //test 3
+        let expected = 9;
+        let actual = tree.find(0, n + 1); // [[1, 3, 4, 7, 9]];
+        assert_eq!(expected, actual);
+
+        //test 4
+        let expected = 9;
+        let actual = tree.find(0, n); // [[1, 3, 4, 7, 9]];
+        assert_eq!(expected, actual);
+
+        //test 5
+        let expected = 7;
+        let actual = tree.find(1, n - 1); // [1, [3, 4, 7], 9];
+        assert_eq!(expected, actual);
+    }
+
+    #[test]
+    fn test_purq_min() {
+        let arr = vec![9, 1, 4, 5, 3];
+        let n = arr.len();
+        let mut tree = PURQ::new(n, i32::MAX / 10, |&a, &b| a.min(b));
+        for i in 0..n {
+            tree.update_tmp(i, arr[i]);
+        }
+        // test 1
+        tree.update_all();
+        let expected = 1;
+        let actual = tree.find(1, n); // [9, [1, 4, 5, 3]]
+        assert_eq!(expected, actual);
+
+        // test 2
+        tree.update_all();
+        let expected = 4;
+        let actual = tree.find(2, n - 1); // [9, 1, [4, 5], 3]
+        assert_eq!(expected, actual);
+    }
+}

@@ -47,3 +47,38 @@ impl RangeAddQueryTree {
         self.sum(r) - self.sum(l)
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_raqt_max() {
+        let n: usize = 8;
+        let mut tree = RangeAddQueryTree::new(n);
+
+        // basically 0 indexed
+        tree.add(0, n, 1);
+        tree.add(1, 5, 3); // expected: [1,4,4,4,4,1,1,1]
+
+        // test 1
+        let expected = 5;
+        let actual = tree.query(0, 2);
+        assert_eq!(expected, actual);
+
+        // test 2
+        let expected = 8;
+        let actual = tree.query(2, 4);
+        assert_eq!(expected, actual);
+
+        // test 3
+        let expected = 5;
+        let actual = tree.query(4, 6);
+        assert_eq!(expected, actual);
+
+        // test 4
+        let expected = 18;
+        let actual = tree.query(0, 6);
+        assert_eq!(expected, actual);
+    }
+}

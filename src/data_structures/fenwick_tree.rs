@@ -37,4 +37,44 @@ where
         s += data[pos].clone();
         s
     }
+
+    fn query(&self, l: usize, r: usize) -> T
+    where
+        T: std::ops::Sub<Output = T>,
+        T: std::ops::Add<Output = T>,
+    {
+        self.sum(r) - self.sum(l)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+
+    use super::*;
+
+    #[test]
+    fn test_raqt_max() {
+        let n: usize = 8;
+        let mut tree = FenwickTree::new(n, 0);
+
+        for i in 0..n {
+            tree.add(i, i as i64 + 1);
+        }
+        // tree: [1, 2, 3, 4, 5, 6, 7, 8]
+
+        // test 1
+        let expected = 3;
+        let actual = tree.query(0, 2);
+        assert_eq!(expected, actual);
+
+        // test 2
+        let expected = 12;
+        let actual = tree.query(2, 5);
+        assert_eq!(expected, actual);
+
+        // test 3
+        let expected = 36;
+        let actual = tree.query(0, n);
+        assert_eq!(expected, actual);
+    }
 }
